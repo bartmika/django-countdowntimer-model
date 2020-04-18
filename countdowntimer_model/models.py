@@ -51,6 +51,12 @@ class CountdownTimer(models.Model):
     )
 
     '''
+    CACHED VALUES
+    '''
+
+    __original_duration_in_minutes = None
+
+    '''
     OBJECT MANAGERS
     '''
 
@@ -129,16 +135,33 @@ class CountdownTimer(models.Model):
     MODEL FUNCTIONS
     """
 
+    def __init__(self, *args, **kwargs):
+        """
+        Override the ``init`` function to support our custom code.
+        """
+        super(CountdownTimer, self).__init__(*args, **kwargs)
+        self.__original_duration_in_minutes = self.duration_in_minutes
+
     @transaction.atomic
     def save(self, *args, **kwargs):
         '''
-        Override the `save` function to support enable our model to act
-        as a countdown timer
+        Override the `save` function to support our custom code.
         '''
         # Declare variable we will use often in this function.
         now_dt = self._now_dt()
 
-        # Assign our initial values since they were not set.
+        '''
+        Reset countdown timer if a new ``duration_in_minutes`` value has been
+        set by the user. As a result all previously set values will be erased.
+        '''
+        if self.duration_in_minutes != self.__original_duration_in_minutes:
+            self.original_start_at = None
+            self.paused_at = None
+            self.cumulative_pause_duration = timedelta()
+
+        '''
+        Assign our initial values since they were not set.
+        '''
         if self.original_start_at == None:
             self.original_start_at = now_dt
             self.original_end_at = self.original_start_at + timedelta(minutes=self.duration_in_minutes)
@@ -154,8 +177,10 @@ class CountdownTimer(models.Model):
                 self.cumulative_pause_duration = self.cumulative_pause_duration + self._pause_delta()
                 self.paused_at = None  # Reset our reset datetime.
 
-        # Reset our modified date/times so the calculations performed by this
-        # model to take into account our cumulative paused duration value.
+        '''
+        Reset our modified date/times so the calculations performed by this
+        model to take into account our cumulative paused duration value.
+        '''
         self.modified_start_at = self.original_start_at + self.cumulative_pause_duration
         self.modified_end_at = self.original_end_at + self.cumulative_pause_duration
 
@@ -164,6 +189,7 @@ class CountdownTimer(models.Model):
         out the saving operation by Django in our ORM.
         '''
         super(CountdownTimer, self).save(*args, **kwargs)
+        self.__original_duration_in_minutes = self.duration_in_minutes
 
     def _now_dt(self):
         # Apply timezone override if user requested it.
