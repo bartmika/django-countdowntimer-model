@@ -1,4 +1,4 @@
-# django-countdowntimer-model
+# Django CountdownTimer Model Library
 
 ## About
 
