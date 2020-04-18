@@ -132,3 +132,6 @@ dmypy.json
 manage.py
 countdowntimer_model_project
 DEVELOPER_NOTES.md
+pep8.sh
+make_and_submit.sh
+coverage.sh

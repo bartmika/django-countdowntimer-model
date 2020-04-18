@@ -1,0 +1,4 @@
+include LICENSE
+include README.md
+recursive-include countdowntimer_model/migrations *
+recursive-include countdowntimer_model *
