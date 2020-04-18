@@ -23,6 +23,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'django>=3.0.5',
+        'pytz>=2019.3'
     ],
     python_requires='>=3.7',
     classifiers=[
