@@ -1,15 +1,12 @@
 # django-countdowntimer-model
 
-The goal of this library is to allow you to inherit an abstract ``CountdownTimer`` model in your model code and then get the ability to countdown time with pause and resume capability.
-
-Simply import, inherit and now your model has countdown capability (with pausing and resuming feature).
-
-This library is written to return the countdown value based on timestamps taken and thus does not require complicated background *tick* processes; in addition, model supports pausing and resuming the countdown.
-
-
 ## About
 
-Abstract countdown timer model to use in your Django projects.
+The goal of this library is to allow you to inherit an abstract model in your model and turn it into a countdown time with pause and resume capability.
+
+Simply import, inherit and your model is now a timer without worrying about the complexity involved in timekeeping.
+
+This library is written to return the countdown value based on timestamps and thus does not require complicated background *tick* processes.
 
 
 ## Minimum Requirements
