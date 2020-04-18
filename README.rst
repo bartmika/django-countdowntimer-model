@@ -13,7 +13,6 @@ This library is written to return the countdown value based on timestamps and th
 
 Minimum Requirements
 --------------------
-
 - Python 3.7
 
 - Django 3.0.5
@@ -21,7 +20,6 @@ Minimum Requirements
 
 Installation
 ------------
-
 Run the following in your project.
 
 .. code-block:: python
@@ -40,7 +38,6 @@ In your ``settings.p`` file please add:
 
 Usage
 ------------
-
 First you must import the abstraction into your ``model`` file.
 
 .. code-block:: python
@@ -82,7 +79,6 @@ or
 
 License
 ------------
-
 This library is licensed under the **BSD 2-Clause License**. See `LICENSE`_ for more information.
 
 .. _LICENSE: https://github.com/bartmika/django-countdowntimer-model/blob/master/LICENSE
