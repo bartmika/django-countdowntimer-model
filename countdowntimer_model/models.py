@@ -1,5 +1,5 @@
 from datetime import date, datetime, timedelta
-from django.contrib.gis.db import models
+from django.db import models
 from django.db import transaction
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -7,17 +7,21 @@ from django.utils.translation import ugettext_lazy as _
 from countdowntimer_model.constants import TIMEZONE_CHOICES
 
 
-class AbstractCountdownTimerManager(models.Manager):
+class CountdownTimerManager(models.Manager):
     pass
 
 
-class AbstractCountdownTimer(models.Model):
+class CountdownTimer(models.Model):
     """
     Abstract model provides data-structure and operations for supporting a
     pausable countdown timer which can be inherited in any Django model.
 
     How do I start using this model? Just set `duration_in_minutes` when
     creating the object and this model will take care of the test.
+
+    Please note, that if there is an `_` underscore in the function then it
+    is supposed to be private, an implementation detail, and should not be used
+    as it can change anytime.
     """
 
     '''
@@ -48,7 +52,7 @@ class AbstractCountdownTimer(models.Model):
     OBJECT MANAGERS
     '''
 
-    objects = AbstractCountdownTimerManager()
+    objects = CountdownTimerManager()
 
     '''
     MODEL FIELDS
@@ -157,7 +161,7 @@ class AbstractCountdownTimer(models.Model):
         Finally call the parent function which handles saving so we can carry
         out the saving operation by Django in our ORM.
         '''
-        super(AbstractCountdownTimer, self).save(*args, **kwargs)
+        super(CountdownTimer, self).save(*args, **kwargs)
 
     def _now_dt(self):
         # Apply timezone override if user requested it.
