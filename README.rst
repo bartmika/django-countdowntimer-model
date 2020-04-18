@@ -1,5 +1,5 @@
 django-countdowntimer-model
-==============
+===========================
 
 About
 -----
@@ -25,11 +25,13 @@ Installation
 Run the following in your project.
 
 .. code-block:: python
+
     pip install django-countdowntimer-model
 
 In your ``settings.p`` file please add:
 
 .. code-block:: python
+
     INSTALLED_APPS = [
         # ...
         "countdowntimer_model",
@@ -42,11 +44,13 @@ Usage
 First you must import the abstraction into your ``model`` file.
 
 .. code-block:: python
+
     from countdowntimer_model.models import CountdownTimer
 
 Afterwords your model must inherit the abstraction.
 
 .. code-block:: python
+
     class DoomsdayCountdownTimer(CountdownTimer):
         # ...
 
@@ -56,21 +60,23 @@ if you want to override to use a custom timezone then you can set the
 ``timezone_override`` field.
 
 .. code-block:: python
+
     doomsday_timer = DoomsdayCountdownTimer.object.create(
         duration_in_minutes=123,
         state=DoomsdayCountdownTimer.STATE.RUNNING,
     )
-```
 
 Now that the object has been created you can get the latest countdown by running
 the following:
 
 .. code-block:: python
+
     remaining_t = doomsday_timer.remaining_time() # // Returned in `time` format.
 
 or
 
 .. code-block:: python
+
     remaining_minutes = doomsday_timer.remaining_time_in_minutes() # // Returned in `integer` format.
 
 

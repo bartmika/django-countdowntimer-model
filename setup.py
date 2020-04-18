@@ -8,7 +8,7 @@ import sys
 
 
 def readme():
-    with io.open("README.md", "r", encoding="utf-8") as my_file:
+    with io.open("README.rst", "r", encoding="utf-8") as my_file:
         return my_file.read()
 
 setup(

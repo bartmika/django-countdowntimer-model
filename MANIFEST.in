@@ -1,4 +1,4 @@
 include LICENSE
-include README.md
+include README.rst
 recursive-include countdowntimer_model/migrations *
 recursive-include countdowntimer_model *
