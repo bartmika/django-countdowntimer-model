@@ -1,6 +1,17 @@
 # django-countdowntimer-model
 
-Abstract countdown timer model to use in your Django projects. 
+
+## About
+
+Abstract countdown timer model to use in your Django projects.
+
+
+## Minimum Requirements
+
+* Python 3.7
+
+* Django 3.0.5
+
 
 ## Installation
 
@@ -22,6 +33,7 @@ INSTALLED_APPS = [
     # ...
 ]
 ```
+
 
 ## Usage
 
@@ -61,3 +73,8 @@ or
 
 ```python
 remaining_minutes = doomsday_timer.remaining_time_in_minutes() # // Returned in `integer` format.
+
+
+## License
+
+This library is licensed under the **BSD 2-Clause License**. See [LICENSE.md](LICENSE) for more information.
