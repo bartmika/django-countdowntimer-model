@@ -51,7 +51,7 @@ class CountdownTimer(models.Model):
     )
 
     '''
-    CACHED VALUES
+    SAVED VALUES
     '''
 
     __original_duration_in_minutes = None
@@ -87,6 +87,12 @@ class CountdownTimer(models.Model):
         blank=True,
         null=True,
         choices=TIMEZONE_CHOICES
+    )
+    start_date_offset_in_minutes = models.PositiveSmallIntegerField(
+        _('Start date offset in minutes'),
+        help_text=_('Add/subtract the duration in minutes the start date of our countdown timer.'),
+        default=0,
+        blank=True,
     )
 
     # DEVELOPERS NOTE:
@@ -163,7 +169,7 @@ class CountdownTimer(models.Model):
         Assign our initial values since they were not set.
         '''
         if self.original_start_at == None:
-            self.original_start_at = now_dt
+            self.original_start_at = now_dt + timedelta(minutes=self.start_date_offset_in_minutes)
             self.original_end_at = self.original_start_at + timedelta(minutes=self.duration_in_minutes)
 
         # CASE 1 OF 2: Becaming a paused state
@@ -246,6 +252,15 @@ class CountdownTimer(models.Model):
         the `minutes` unit of measure.
         """
         return round(abs(self.remaining_time().seconds / 60))
+
+    def remaining_future_datetime(self):
+        """
+        Returns the current date time plus the remaining time in minutes.
+        This is a useful function if your countdown timer GUI wants a date/time
+        value to start the GUI countdown timer instance.
+        """
+        remaining_time_in_minutes = self.remaining_time_in_minutes()
+        return self._now_dt() + timedelta(minutes=remaining_time_in_minutes)
 
     def time_elapsed(self):
         """
