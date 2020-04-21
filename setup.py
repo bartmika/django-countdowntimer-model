@@ -12,7 +12,7 @@ def readme():
         return my_file.read()
 
 setup(
-    name='django-countdowntimer_model',
+    name='django-countdowntimer-model',
     version='0.0.5',
     url='https://github.com/bartmika/django-countdowntimer-model',
     license='BSD 2-Clause License',
