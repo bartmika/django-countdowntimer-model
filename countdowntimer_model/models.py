@@ -200,11 +200,11 @@ class CountdownTimer(models.Model):
     def _now_dt(self):
         # Apply timezone override if user requested it.
         if self.timezone_override:
-            naive_now = datetime.now()
-            overriding_timezone = pytz.timezone(self.timezone_override)
-            return naive_now.replace(tzinfo=overriding_timezone)
+            timezone_override = pytz.timezone(self.timezone_override)
+            utc_dt = datetime.utcnow().replace(tzinfo=pytz.utc)
+            return utc_dt.astimezone(timezone_override)
         else:
-            return timezone.now()
+            return datetime.utcnow().replace(tzinfo=pytz.utc)
 
     def _pause_delta(self):
         """
