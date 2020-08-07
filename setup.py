@@ -13,7 +13,7 @@ def readme():
 
 setup(
     name='django-countdowntimer-model',
-    version='0.0.6',
+    version='0.0.7',
     url='https://github.com/bartmika/django-countdowntimer-model',
     license='BSD 2-Clause License',
     description="Abstract countdown timer model to use in your Django projects.",
@@ -22,7 +22,7 @@ setup(
     author_email='bart@mikasoftware.com',
     packages=find_packages(),
     install_requires=[
-        'django>=3.0.5',
+        'django>=3.0.7',
         'pytz>=2019.3'
     ],
     python_requires='>=3.7',

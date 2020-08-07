@@ -15,7 +15,7 @@ Minimum Requirements
 --------------------
 - Python 3.7
 
-- Django 3.0.5
+- Django 3.0.7
 
 
 Installation
