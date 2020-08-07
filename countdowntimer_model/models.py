@@ -239,7 +239,16 @@ class CountdownTimer(models.Model):
         Returns how much time is remaining in `time` format while ignoring
         the time that elasped due to our pausing.
         """
-        now_dt = self.tenant.aware_now_dt()
+        try:
+            '''
+            DEVELOPERS NOTE:
+            IF your code has tenancy and you want to get 'now' specific to a
+            tenant then call that tenants `aware_now_dt` function. If you do not
+            want this feature then the default `now` will be returned.
+            '''
+            now_dt = self.tenant.aware_now_dt()
+        except Exception as e:
+            now_dt = self._now_dt()
         end_dt = self._conditional_pause_delta() + self.modified_end_at
 
         if now_dt > end_dt:
