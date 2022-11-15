@@ -4,7 +4,7 @@ from datetime import date, datetime, timedelta
 from django.db import models
 from django.db import transaction
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from countdowntimer_model.constants import TIMEZONE_CHOICES
 
